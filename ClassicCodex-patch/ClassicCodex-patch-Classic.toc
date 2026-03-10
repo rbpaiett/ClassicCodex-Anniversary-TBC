@@ -1,0 +1,24 @@
+## Interface: 20505
+## Notes: ClassicCodex-patch for Anniversary TBC
+## Title: ClassicCodex Data Patch
+## Author: Pgarneau, Shagu, SwimmingTiger
+## Version: v1.5.3
+## Dependencies: ClassicCodex-loader
+
+# 1. LOAD DATA SOURCES FIRST (The Questie DB strings)
+tbcItemDB.lua
+tbcNpcDB.lua
+tbcObjectDB.lua
+tbcQuestDB.lua
+
+# 2. LOAD PATCH LOGIC (The files that use the data)
+units-questie-tbc.lua
+objects-questie-tbc.lua
+units-questie.lua
+units-wowhead.lua
+manual-patch.lua
+
+# 3. HEAVY DATA OVERRIDES (The delayed "Correction Tape")
+# Place it here so it doesn't interrupt the initial database merge
+quests-questie-tbc.lua
+quests-questie.lua

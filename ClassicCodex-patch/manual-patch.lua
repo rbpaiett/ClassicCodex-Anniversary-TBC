@@ -1,4 +1,9 @@
 -- Manually maintained database patches
+
+C_Timer.After(6.0, function()
+    if not CodexDB then return end
+    -- The rest of the original file code stays below this...
+
 if select(4, C_AddOns.GetAddOnInfo('MergeQuestieToCodexDB')) then return end
 
 -- Add missing quests
@@ -54,7 +59,7 @@ D[1368].obj = {
 }
 
 -- Alliance-specific patches
-if select(4, GetAddOnInfo('MergeQuestieToCodexDB')) then return end
+if select(4, C_AddOns.GetAddOnInfo('MergeQuestieToCodexDB')) then return end
 local D = CodexDB.units.data
 
 if UnitFactionGroup('player') == 'Alliance' then
@@ -65,3 +70,5 @@ if UnitFactionGroup('player') == 'Alliance' then
     {48.3,84.3,2597,0}, --add
   }
 end
+
+end)

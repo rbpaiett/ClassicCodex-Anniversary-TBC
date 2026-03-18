@@ -43,10 +43,15 @@ end
 
 CodexQuest:SetScript("OnEvent", function(self, event, ...)
     if event == "ADDON_LOADED" then
-        arg1 = ...
+        local arg1 = ... -- using local is cleaner
         if arg1 == "ClassicCodex" then
-            CodexQuest:AddQuestLogIntegration()
-            CodexQuest:AddWorldMapIntegration()
+            -- Delay the heavy stuff by 10-15 seconds
+            C_Timer.After(15, function()
+                CodexQuest:AddQuestLogIntegration()
+                CodexQuest:AddWorldMapIntegration()
+                -- Optional: print a message to verify it worked
+                -- DEFAULT_CHAT_FRAME:AddMessage("|cff00ff00ClassicCodex:|r Background loading complete.")
+            end)
         else
             return
         end
@@ -190,6 +195,7 @@ CodexQuest:SetScript("OnUpdate", function()
 end)
 
 function CodexQuest:UpdateQuestLog()
+    if not CodexDB or not CodexDB.quests or not CodexDB.quests.loc then return end -- ADD THIS LINE
     CodexQuest.questLogTemp = {}
 
     -- Save header states and expand them for scanning

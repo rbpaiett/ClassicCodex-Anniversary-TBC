@@ -1,7 +1,12 @@
 -- STAGGERED LOAD: Vanilla Quest Overrides (8 second delay)
 C_Timer.After(8.0, function()
-    local realD = _G.CodexDatabase and _G.CodexDatabase["quests"]
-    if not realD then return end
+    -- Check for BOTH possible names (CodexDB is the new one, CodexDatabase is the old)
+    local realD = (CodexDB and CodexDB.quests and CodexDB.quests.data) or (_G.CodexDatabase and _G.CodexDatabase["quests"])
+    
+    if not realD then 
+        print("|cffff0000[ClassicCodex]|r Patch failed: Database not found.")
+        return 
+    end
 
     -- This "Ghost" handler catches any ID that doesn't exist at all
     local ghost = setmetatable({}, {
@@ -9,14 +14,13 @@ C_Timer.After(8.0, function()
         __newindex = function() end
     })
 
-    -- This "Deep Handler" ensures sub-tables like .start exist if the quest is found
+    -- This "Deep Handler" ensures sub-tables like .start exist
     local D = setmetatable({}, {
         __index = function(_, id)
             if realD[id] then
-                -- If quest exists, ensure nested fields (start, excl, etc) don't crash
                 return setmetatable(realD[id], {
                     __index = function(t, k)
-                        rawset(t, k, {}) -- Auto-create the sub-table (like .start)
+                        rawset(t, k, {}) 
                         return t[k]
                     end
                 })
@@ -6124,8 +6128,12 @@ D[9422].obj.U={18199} --old: nil
 D[9422].pre=nil --old: nil
 D[9422].min=55 --old: 1
 D[9422].race=178 --old: nil
-CodexDB.questiePatchVersion = CodexDB.questiePatchVersion or {}
-CodexDB.questiePatchVersion.quest = '6.3.12'
+-- Safeguard the versioning so it never hits a "nil" global
+    local targetDB = CodexDB or _G.CodexDatabase
+    if targetDB then
+        targetDB.questiePatchVersion = targetDB.questiePatchVersion or {}
+        targetDB.questiePatchVersion.quest = '7.2.3'
+    end
 
-    print("|cffbbbbbbCodex Patch:|r Vanilla Quest Overrides successfully applied!")
+    print("|cff00ff00Codex Patch:|r Vanilla Quest Overrides successfully applied!")
 end)

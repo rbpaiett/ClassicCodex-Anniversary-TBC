@@ -16,7 +16,7 @@ CodexDB.locales = {
 
 local loc = GetLocale()
 local dbs = {"items", "quests", "objects", "units", "zones", "professions"}
-local devMode = select(4, C_AddOns.GetAddOnInfo('MergeQuestieToCodexDB'))
+local devMode = select(4, GetAddOnInfo('MergeQuestieToCodexDB'))
 
 -- Patch databases to further expansions
 local function patchtable(base, diff)
@@ -82,20 +82,9 @@ if not devMode then
         end
     end
     local function reportLocalMissing(name, key, notice)
-        -- SANITY CHECK: If there is no key, or it's a table, we can't report it.
-        if not key or type(key) == "table" then 
-            return "Unknown ID" 
-        end
-
         name = name .. '-loc'
-        
-        -- Use tostring() to ensure gsub doesn't crash if the key is weird
-        local safeKey = tostring(key)
-        local safeLocale = tostring(GetLocale() or "enUS")
-
-        notice = notice:gsub("{locale}", safeLocale):gsub("{id}", safeKey)
+        notice = notice:gsub("{locale}", GetLocale()):gsub("{id}", key)
             .."\n"..L["Please send a report to the developer."]
-
         if not CodexDB.missingReport[name] then
             CodexDB.missingReport[name] = {}
         end
@@ -206,32 +195,28 @@ local bitclasses = {
 function CodexDatabase:PlayerHasSkill(skill)
     local minRank = 0
     if type(skill) == 'table' then
-        minRank = tonumber(skill.min) or 0
-        skill = tonumber(skill.id) or 0
+        minRank = skill.min
+        skill = skill.id
     end
-    -- Safety: Ensure skill is a number and exists in the table
-    if not skill or not professions or not professions[skill] then return false end
+    if not professions[skill] then return false end
 
-    for i = 1, GetNumSkillLines() do
+    for i = 0, GetNumSkillLines() do
         local name, _, _, rank = GetSkillLineInfo(i)
-        if name == professions[skill] and (rank or 0) >= minRank then
+        if name == professions[skill] and rank >= minRank then
             return true
         end
     end
+
     return false
 end
 
 function CodexDatabase:PlayerHasReputation(repu)
     local minRank = 0
     if type(repu) == 'table' then
-        minRank = tonumber(repu.min) or 0
-        repu = tonumber(repu.id) or 0
+        minRank = repu.min
+        repu = repu.id
     end
-    if not repu or repu == 0 then return true end -- Default to visible if ID is broken
-    
-    local name, _, rank = GetFactionInfoByID(repu)
-    -- Safety: If name is nil, the faction ID doesn't exist in the current game version
-    if not name then return true end 
+    local _, _, _, _, _, rank = GetFactionInfoByID(repu)
     return rank and rank > minRank
 end
 
@@ -293,33 +278,30 @@ function CodexDatabase:GetRaceMaskById(id, db)
     local factionMap = {["A"] = 77, ["H"] = 178, ["AH"] = 255, ["HA"] = 255}
     local raceMask = 0
 
-    -- Safety check for missing IDs or non-quest data
-    if not id or id == 0 or db ~= "quests" or not quests[id] then
+    if not id or id == 0 or db ~= "quests" then
         return raceMask
     end
 
-    -- Handle TBC data: if "race" is a table {128}, extract the number 128
     if quests[id]["race"] ~= nil then
-        local r = quests[id]["race"]
-        return tonumber(type(r) == "table" and r or r) or 0
+        return quests[id]["race"]
     end
 
     if quests[id]["start"] then
         local questStartRaceMask = 0
 
-        -- Get Quest starter unit faction
+        -- Get Quest starter faction
         if quests[id]["start"]["U"] then
             for _, unitId in pairs(quests[id]["start"]["U"]) do
-                if units[unitId] and units[unitId]["fac"] and factionMap[units[unitId]["fac"]] then
+                if units[unitId]["fac"] and factionMap[units[unitId]["fac"]] then
                     questStartRaceMask = bit.bor(factionMap[units[unitId]["fac"]])
                 end
             end
         end
 
-        -- Get Quest starter object faction
+        -- Get Quest object starter faction
         if quests[id]["start"]["O"] then
             for _, objectId in pairs(quests[id]["start"]["O"]) do
-                if objects[objectId] and objects[objectId]["fac"] and factionMap[objects[objectId]["fac"]] then
+                if objects[objectId]["fac"] and factionMap[objects[objectId]["fac"]] then
                     questStartRaceMask = bit.bor(factionMap[objects[objectId]["fac"]])
                 end
             end
@@ -848,7 +830,7 @@ function CodexDatabase:SearchQuests(meta, maps)
     local level, minLevel, maxLevel, race, class
     local maps = maps or {}
     local meta = meta or {}
-    local completedQuests = GetQuestsCompleted() or {}
+    local completedQuests = GetQuestsCompleted()
 
     local playerLevel = UnitLevel("player")
     local playerFaction = UnitFactionGroup("player")
@@ -921,33 +903,19 @@ function CodexDatabase:SearchQuests(meta, maps)
             -- hide unavailable quest because the next quest in the quest chain has been completed
         elseif quests[id]["excl"] and oneOfCompleted(quests[id]["excl"]) then
             -- hide unavailable quest because a quest that is mutually exclusive with the current quest has been completed
-        
-        elseif quests[id]["race"] and (function()
-            local r = quests[id]["race"]
-            -- If it's a table, try to get the first index; if not a number, default to 0
-            local val = type(r) == "table" and tonumber(r[1]) or tonumber(r)
-            if not val then return false end -- Skip math if data is totally broken
-            return not (bit.band(val, playerRace) == playerRace)
-        end)() then
+        elseif quests[id]["race"] and not (bit.band(quests[id]["race"], playerRace) == playerRace) then
             -- hide non-available quests for your race
-        elseif quests[id]["class"] and (function()
-            local c = quests[id]["class"]
-            -- If it's a table, try to get the first index; if not a number, default to 0
-            local val = type(c) == "table" and tonumber(c[1]) or tonumber(c)
-            if not val then return false end -- Skip math if data is totally broken
-            return not (bit.band(val, playerClass) == playerClass)
-        end)() then
+        elseif quests[id]["class"] and not (bit.band(quests[id]["class"], playerClass) == playerClass) then
             -- hide non-available quests for your class
-
-        elseif quests[id]["lvl"] and (tonumber(type(quests[id]["lvl"]) == "table" and quests[id]["lvl"] or quests[id]["lvl"]) or 0) < playerLevel - 9 and not CodexConfig.showLowLevel then
+        elseif quests[id]["lvl"] and quests[id]["lvl"] < playerLevel - 9 and not CodexConfig.showLowLevel then
             -- hide low level quests
-        elseif quests[id]["lvl"] and (tonumber(type(quests[id]["lvl"]) == "table" and quests[id]["lvl"] or quests[id]["lvl"]) or 0) > playerLevel + 10 then
+        elseif quests[id]["lvl"] and quests[id]["lvl"] > playerLevel + 10 then
             -- hide very high level quests
-        elseif quests[id]["min"] and (tonumber(type(quests[id]["min"]) == "table" and quests[id]["min"] or quests[id]["min"]) or 0) > playerLevel + 3 then
-            -- hide high level quests
+        elseif quests[id]["min"] and quests[id]["min"] > playerLevel + 3 then
+            -- hide quests high level quests
         elseif quests[id]["hide"] and not CodexConfig.showFestival then
             -- hide event quests
-        elseif (tonumber(type(minLevel) == "table" and minLevel or minLevel) or 0) > playerLevel and not CodexConfig.showHighLevel then
+        elseif minLevel > playerLevel and not CodexConfig.showHighLevel then
             -- hide level+3 quests
         elseif quests[id]["skill"] and not CodexDatabase:PlayerHasSkill(quests[id]["skill"]) then
             -- hide non-available quests for your profession??

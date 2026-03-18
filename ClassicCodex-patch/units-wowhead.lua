@@ -1,9 +1,4 @@
 -- Unit coords from WowHead
-
-C_Timer.After(6.0, function()
-    if not CodexDB then return end
-    -- The rest of the original file code stays below this...
-
 local D = CodexDB.units.data
 if select(4, C_AddOns.GetAddOnInfo('MergeQuestieToCodexDB')) then return end
 
@@ -10634,5 +10629,3 @@ D[16479].coords={
 {40.6,49.4,16,0},
 {40.8,50.6,16,0},
 }
-
-end)

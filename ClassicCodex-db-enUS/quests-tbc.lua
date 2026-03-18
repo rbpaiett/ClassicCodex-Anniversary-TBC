@@ -12417,11 +12417,6 @@ CodexDB["quests"]["enUS-tbc"]={
 ["O"]="Capture the Overlook, the Stadium and Broken Hill, then return to Battlecryer Blackeye in Thrallmar.",
 ["T"]="Hellfire Fortifications",
 },
-[55296]={
-["D"]="Blah",
-["O"]="Blah",
-["T"]="Blah",
-},
 [63866]={
 ["D"]="",
 ["O"]="Use the Shimmering Vessel on M'uru to fill it and return to Knight-Lord Bloodvalor in Silvermoon City.",

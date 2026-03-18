@@ -10,7 +10,7 @@ SlashCmdList["CODEX"] = function(input, editBox)
     local meta = {["addon"] = "CODEX"}
 
     if (input == "" or input == nil) then
-        print("Classic Codex (v" .. tostring(C_AddOns.GetAddOnMetadata("ClassicCodex", "Version")) .. "):")
+        print("Classic Codex (v" .. tostring(GetAddOnMetadata("ClassicCodex", "Version")) .. "):")
         print(L["|cff33ffcc/codex|cffffffff show |cffcccccc - Show database interface"])
         print(L["|cff33ffcc/codex|cffffffff unit <unit> |cffcccccc - Search units"])
         print(L["|cff33ffcc/codex|cffffffff object <gameObject> |cffcccccc - Search objects"])

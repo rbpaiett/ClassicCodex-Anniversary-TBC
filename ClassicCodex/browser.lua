@@ -411,14 +411,10 @@ local function ResultButtonReload(self)
         self.factionH:Hide()
 
         local raceMask = CodexDatabase:GetRaceMaskById(self.id, self.btype)
-        
-        -- SANITIZE: If raceMask is a table or nil, turn it into 0 so bit.band doesn't crash
-        local safeMask = tonumber(type(raceMask) == "table" and raceMask[1] or raceMask) or 0
-
-        if (bit.band(77, safeMask) > 0) or (safeMask == 0 and self.btype == "quests") then
+        if (bit.band(77, raceMask) > 0)  or (raceMask == 0 and self.btype == "quests") then
             self.factionA:Show()
         end
-        if (bit.band(178, safeMask) > 0) or (safeMask == 0 and self.btype == "quests") then
+        if (bit.band(178, raceMask) > 0)  or (raceMask == 0 and self.btype == "quests") then
             self.factionH:Show()
         end
     end

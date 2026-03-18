@@ -11,7 +11,7 @@
 ## SavedVariablesPerCharacter: CodexConfig, CodexHiddenQuests, CodexBrowserFavorites, CodexColors
 ## Dependencies: ClassicCodex-loader, LootCodex
 ## OptionalDeps: LootCodex
-## LoadOnDemand: 1
+## LoadOnDemand: 0
 
 ## X-Curse-Project-ID: 351302
 ## X-WoWI-ID: 25442

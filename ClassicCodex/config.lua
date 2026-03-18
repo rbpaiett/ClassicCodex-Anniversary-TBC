@@ -454,12 +454,7 @@ end
 CodexConfigFrame:RegisterEvent("ADDON_LOADED")
 CodexConfigFrame:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" and arg1 == "ClassicCodex" then
-        -- Delay config by 5 seconds (shorter than the 15s in quest.lua)
-        C_Timer.After(5, function()
-            self:LoadConfig()
-            -- Note: We don't need UnregisterEvent inside the timer 
-            -- because the event already fired.
-        end)
+        self:LoadConfig()
         CodexConfigFrame:UnregisterEvent("ADDON_LOADED")
     end
 end)

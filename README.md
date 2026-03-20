@@ -3,6 +3,8 @@ Status: Alpha (Functional but contains known/unknown bugs).
 Requirement: Must have Loot Codex installed for the database.
 Original Project: https://github.com/SwimmingTiger/ClassicCodex / https://www.curseforge.com/wow/addons/classiccodex
 
+"Installation: Delete your old WTF\SavedVariables\ClassicCodex.lua before first run to ensure the new TBC-only data loads correctly."
+
 ?? Important Performance Note (Anniversary TBC)
 First Load Delay: On your very first login with this addon, the game may freeze for 15-30 seconds.
 Do NOT Alt-F4. The addon is simply indexing the large Loot Codex database for the first time.

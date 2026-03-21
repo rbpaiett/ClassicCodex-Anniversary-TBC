@@ -1,6 +1,5 @@
-ATTENTION: This is a community-maintained Alpha fork for the WoW Anniversary TBC realms.
-Status: Alpha (Functional but contains known/unknown bugs).
-
+ATTENTION: This is a community-maintained Beta fork for the WoW Anniversary TBC realms.
+Status: Beta (Stable if Ace3 conflict is managed).
 ?? CRITICAL FIX: If you experience a 30-second game freeze on login (usually on the second login of a session), you must delete the standalone Interface/AddOns/Ace3 folder. This addon is compatible with others that embed libraries, but a global "Master" Ace3 folder will cause an infinite loop.
 Requirement: Must have Loot Codex installed for the database.
 

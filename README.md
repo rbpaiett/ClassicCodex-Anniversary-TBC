@@ -1,14 +1,10 @@
 ATTENTION: This is a community-maintained Alpha fork for the WoW Anniversary TBC realms.
 Status: Alpha (Functional but contains known/unknown bugs).
+
+?? CRITICAL FIX: If you experience a 30-second game freeze on login (usually on the second login of a session), you must delete the standalone Interface/AddOns/Ace3 folder. This addon is compatible with others that embed libraries, but a global "Master" Ace3 folder will cause an infinite loop.
 Requirement: Must have Loot Codex installed for the database.
+
 Original Project: https://github.com/SwimmingTiger/ClassicCodex / https://www.curseforge.com/wow/addons/classiccodex
-
-"Installation: Delete your old WTF\SavedVariables\ClassicCodex.lua before first run to ensure the new TBC-only data loads correctly."
-
-?? Important Performance Note (Anniversary TBC)
-First Load Delay: On your very first login with this addon, the game may freeze for 15-30 seconds.
-Do NOT Alt-F4. The addon is simply indexing the large Loot Codex database for the first time.
-Subsequent logins will be much faster once this initial "crunch" is finished.
 
 ClassicCodex [![Build Status](https://travis-ci.com/SwimmingTiger/ClassicCodex.svg)](https://travis-ci.com/SwimmingTiger/ClassicCodex)
 ===================

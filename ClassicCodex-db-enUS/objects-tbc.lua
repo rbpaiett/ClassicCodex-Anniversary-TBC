@@ -5055,4 +5055,5 @@ CodexDB["objects"]["enUS-tbc"]={
 [300158]="TEMP Elrendar Falls",
 [300500]="_",
 [300601]="_",
+[500001]="Misty Reed Mahi Mahi Fishing Location"
 }

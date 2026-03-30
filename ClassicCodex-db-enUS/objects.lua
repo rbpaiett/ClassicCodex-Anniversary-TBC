@@ -9069,4 +9069,8 @@ CodexDB["objects"]["enUS"]={
 [300153]="TEMP Entrance to Onyxia\'s Lair",
 [300500]="Event Vael",
 [300601]="Door",
+[500000]="Feralas Ahi Fishing Location",
+[500001]="Misty Reed Mahi Mahi Fishing Location",
+[500002]="Sar'theris Striker Fishing Location",
+[500003]="Savage Coast Blue Sailfin Fishing Location",
 }

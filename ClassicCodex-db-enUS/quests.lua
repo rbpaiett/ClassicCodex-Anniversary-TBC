@@ -21011,7 +21011,7 @@ CodexDB["quests"]["enUS"]={
 },
 [9268]={
 ["D"]="",
-["O"]="",
+["O"]="You seek to befriend the goblins of Tanaris once again, $N. We're in need of materials for sails and guns to fight off our old enemies, the Bloodsail Buccaneers.  Bring me mageweave and strong flux and we'll be on our way to pardoning your trespasses.",
 ["T"]="War at Sea",
 },
 [9269]={

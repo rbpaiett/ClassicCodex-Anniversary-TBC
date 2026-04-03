@@ -27559,7 +27559,8 @@ CodexDB["quests"]["data-tbc"]={
 },
 [9268]={
 ["class"]="_",
-["lvl"]=-1,
+["lvl"]=60,
+["min"]=40,
 ["next"]="_",
 ["race"]="_",
 ["skill"]="_",

@@ -1,9 +1,0 @@
-Beta 1.0 - The "Pure TBC" Update
-Fixed Cracks: Fixed the "nil value" Lua errors that happened during login. (Cleaned up the Questie patch logic).
-Surgical Trim: Manually removed all Northrend (WotLK) data to keep the map clean for TBC.
-Items: Cut off at ID 36,000 (Preserves all Sunwell gear).
-NPCs/Vendors: Cut off at ID 26,100 (Keeps TBC Battlemasters/City NPCs).
-Objects: Cut off at ID 186,000 (No Northrend nodes/chests).
-Quests: Cut off at ID 12,500 (Stops at the start of the Northrend boat trip).
-Novelty Kept: Left in some "Not intended for players" GM/Alpha items just for fun.
-Clean Slate: Inscription and Level 80 profession caps (450) have been removed.

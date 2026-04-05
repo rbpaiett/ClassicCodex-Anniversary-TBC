@@ -164,8 +164,12 @@ if not CodexUI then
     b:SetFontString(b.font)
   end
   
-  function CodexUI.api.CreateScrollFrame(name, parent)
-    local f = CreateFrame("ScrollFrame", name, parent)
+    function CodexUI.api.CreateScrollFrame(name, parent)
+        local f = CreateFrame("ScrollFrame", name, parent)
+    
+        -- THE FIX: Force the container to be 100% bright
+        f:SetIgnoreParentAlpha(true) 
+        f:SetAlpha(1)
   
     -- create slider
     f.slider = CreateFrame("Slider", nil, f)

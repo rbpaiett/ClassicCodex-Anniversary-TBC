@@ -466,6 +466,11 @@ end
 
 local function ResultButtonCreate(i, resultType)
     local f = CreateFrame("Button", nil, CodexBrowser.tabs[resultType].list)
+    
+    f:SetFrameStrata("HIGH")
+    f:SetFrameLevel(CodexBrowser:GetFrameLevel() + 25)
+    f:SetIgnoreParentAlpha(true)
+
     f:SetPoint("TOPLEFT", CodexBrowser.tabs[resultType].list, "TOPLEFT", 10, -i * 30 + 5)
     f:SetPoint("BOTTOMRIGHT", CodexBrowser.tabs[resultType].list, "TOPRIGHT", 10, -i * 30 - 15)
     f:Hide()
@@ -476,18 +481,24 @@ local function ResultButtonCreate(i, resultType)
 
     f.tex = f:CreateTexture("BACKGROUND")
     f.tex:SetAllPoints(f)
-    f.tex:SetColorTexture(1, 1, 1, (i % 2 == 1 and .02 or .04))
-    -- f.tex:SetVertexColor(1, 1, 1, 0.02)
+    f.tex:SetColorTexture(1, 1, 1, (i % 2 == 1 and .05 or .1))
 
-    -- text properties
-    f.text = f:CreateFontString("Caption", "BACKGROUND", "GameFontWhite")
-    f.text:SetFont(CodexUI.defaultFont, CodexUIConfig.global.fontSize, "OUTLINE")
+    local standardFont = "Fonts\\FRIZQT__.TTF"
+    f.text = f:CreateFontString("Caption", "OVERLAY", "GameFontNormal")
+    f.text:SetFont(standardFont, 12, "OUTLINE")
+    f.text:SetIgnoreParentAlpha(true) 
+    f.text:SetAlpha(1)
+    f.text:SetTextColor(1, 1, 1, 1) 
     f.text:SetAllPoints(f)
     f.text:SetJustifyH("CENTER")
-    f.idText = f:CreateFontString("ID", "BACKGROUND", "GameFontDisable")
+
+    f.idText = f:CreateFontString("ID", "OVERLAY", "GameFontDisable")
+    f.idText:SetFont(standardFont, 10, "OUTLINE")
+    f.idText:SetIgnoreParentAlpha(true)
+    f.idText:SetAlpha(1)
+    f.idText:SetTextColor(0.8, 0.8, 0.8, 1) 
     f.idText:SetPoint("LEFT", f, "LEFT", 30, 0)
 
-    -- favorite button
     f.fav = CreateFrame("Button", nil, f)
     f.fav:SetHitRectInsets(-3, -3, -3, -3)
     f.fav:SetPoint("LEFT", 0, 0)
@@ -496,50 +507,48 @@ local function ResultButtonCreate(i, resultType)
     f.fav.icon = f.fav:CreateTexture("OVERLAY")
     f.fav.icon:SetTexture("Interface\\Addons\\ClassicCodex\\img\\fav")
     f.fav.icon:SetAllPoints(f.fav)
+    f.fav:SetIgnoreParentAlpha(true)
 
-    -- faction icons
     if resultType ~= "items" then
         f.factionA = f:CreateTexture("OVERLAY")
         f.factionA:SetTexture("Interface\\Addons\\ClassicCodex\\img\\icon_alliance")
         f.factionA:SetWidth(16)
         f.factionA:SetHeight(16)
-        f.factionA:SetPoint("RIGHT", -5, 0)
+        f.factionA:SetPoint("RIGHT", f, "RIGHT", -5, 0)
+        f.factionA:SetIgnoreParentAlpha(true)
+
         f.factionH = f:CreateTexture("OVERLAY")
         f.factionH:SetTexture("Interface\\Addons\\ClassicCodex\\img\\icon_horde")
         f.factionH:SetWidth(16)
         f.factionH:SetHeight(16)
-        f.factionH:SetPoint("RIGHT", -24, 0)
+        f.factionH:SetPoint("RIGHT", f, "RIGHT", -24, 0)
+        f.factionH:SetIgnoreParentAlpha(true)
     end
 
-    -- drop, loot, vendor buttons
     if resultType == "items" then
         local buttons = {
           ["U"] = { ["offset"] = -5,  ["icon"] = "icon_npc",    ["parameter"] = "id",   },
           ["O"] = { ["offset"] = -24, ["icon"] = "icon_object", ["parameter"] = "id",   },
           ["V"] = { ["offset"] = -43, ["icon"] = "icon_vendor", ["parameter"] = "name", },
         }
-    
         for button, settings in pairs(buttons) do
           f[button] = CreateFrame("Button", nil, f)
           f[button]:SetHitRectInsets(-3,-3,-3,-3)
-          f[button]:SetPoint("RIGHT", settings.offset, 0)
+          f[button]:SetPoint("RIGHT", f, "RIGHT", settings.offset, 0)
           f[button]:SetWidth(16)
           f[button]:SetHeight(16)
-    
+          f[button]:SetIgnoreParentAlpha(true)
           f[button].buttonType = button
           f[button].parameter = settings.parameter
-    
           f[button].icon = f[button]:CreateTexture("OVERLAY")
           f[button].icon:SetAllPoints(f[button])
           f[button].icon:SetTexture("Interface\\Addons\\ClassicCodex\\img\\" .. settings.icon)
-    
           f[button]:SetScript("OnEnter", ResultButtonEnterSpecial)
           f[button]:SetScript("OnLeave", ResultButtonLeaveSpecial)
           f[button]:SetScript("OnClick", ResultButtonClickSpecial)
         end
     end
 
-    -- bind functions
     f.Reload = ResultButtonReload
     f:SetScript("OnLeave", ResultButtonLeave)
     f:SetScript("OnEnter", ResultButtonEnter)
@@ -606,12 +615,26 @@ local function CreateBrowseWindow(fname, name, parent, anchor, x, y)
     parent.tabs[fname] = CodexUI.api.CreateScrollFrame(name, parent)
     parent.tabs[fname]:SetPoint("TOPLEFT", parent, "TOPLEFT", 10, -65)
     parent.tabs[fname]:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -10, 45)
+    
+    -- CHANGE: Use HIGH (or MEDIUM) so it doesn't bully the Map/Bags
+    parent.tabs[fname]:SetFrameStrata("MEDIUM") 
+    parent.tabs[fname]:SetFrameLevel(5)  
+    
     parent.tabs[fname].buttons = { }
   
+    -- 1. Create the backdrop frame FIRST
     parent.tabs[fname].backdrop = CreateFrame("Frame", name .. "Backdrop", parent.tabs[fname], BackdropTemplateMixin and "BackdropTemplate")
-    parent.tabs[fname].backdrop:SetFrameLevel(1)
+    
+    -- 2. NOW it is safe to set its properties because it exists
+    parent.tabs[fname].backdrop:SetFrameLevel(1) 
     parent.tabs[fname].backdrop:SetPoint("TOPLEFT", parent.tabs[fname], "TOPLEFT", -5, 5)
     parent.tabs[fname].backdrop:SetPoint("BOTTOMRIGHT", parent.tabs[fname], "BOTTOMRIGHT", 5, -5)
+    
+    -- 3. Force the solid colors
+    parent.tabs[fname].backdrop:SetBackdropColor(0, 0, 0, 1)
+    parent.tabs[fname].backdrop:SetBackdropBorderColor(1, 1, 1, 1)
+    
+    -- 4. Let the Codex API finish the setup
     CodexUI.api.CreateBackdrop(parent.tabs[fname].backdrop, nil, true)
   
     parent.tabs[fname].button = CreateFrame("Button", name .. "Button", parent, BackdropTemplateMixin and "BackdropTemplate")
@@ -619,12 +642,15 @@ local function CreateBrowseWindow(fname, name, parent, anchor, x, y)
     parent.tabs[fname].button:SetWidth(153)
     parent.tabs[fname].button:SetHeight(30)
     parent.tabs[fname].button:SetScript("OnClick", function()
-      SelectView(parent.tabs[fname])
+    SelectView(parent.tabs[fname])
     end)
   
     CodexUI.api.SkinButton(parent.tabs[fname].button)
     parent.tabs[fname].list = CodexUI.api.CreateScrollChild(name .. "Scroll", parent.tabs[fname])
     parent.tabs[fname].list:SetWidth(600)
+    
+    parent.tabs[fname].list:SetAlpha(1)
+    parent.tabs[fname].list:SetIgnoreParentAlpha(true)
   
     parent.tabs[fname]:Hide()
 end   
@@ -692,17 +718,36 @@ CodexBrowser:Hide()
 CodexBrowser:SetWidth(640)
 CodexBrowser:SetHeight(480)
 CodexBrowser:SetPoint("CENTER", 0, 0)
---CodexBrowser:SetFrameStrata("FULLSCREEN_DIALOG")
-CodexBrowser:SetFrameStrata("MEDIUM")
-CodexBrowser:SetFrameLevel(1)
+
+-- SETTINGS: Plays nice with Map, but stays on top when clicked
+CodexBrowser:SetFrameStrata("MEDIUM") 
+CodexBrowser:SetFrameLevel(10)
+CodexBrowser:SetToplevel(true) 
+
+-- THE FIX: We use the Backdrop itself for the solid look. 
+-- This is safer than the "Black Carpet" because it can't cover the text.
+CodexBrowser:SetBackdrop({
+    bgFile = "Interface\\Buttons\\WHITE8X8", 
+    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", 
+    tile = true, tileSize = 16, edgeSize = 16, 
+    insets = { left = 4, right = 4, top = 4, bottom = 4 }
+})
+CodexBrowser:SetBackdropColor(0, 0, 0, 1)        -- Solid Black
+CodexBrowser:SetBackdropBorderColor(1, 1, 1, 1)  -- Solid White Border
+
+-- MOVEMENT AND ACTIVE WINDOW SETTINGS:
 CodexBrowser:SetMovable(true)
 CodexBrowser:EnableMouse(true)
-CodexBrowser:SetScript("OnMouseDown",function(self)
-  self:StartMoving()
+CodexBrowser:SetScript("OnMouseDown", function(self)
+    self:StartMoving()
+end)
+CodexBrowser:SetScript("OnMouseUp", function(self)
+    self:StopMovingOrSizing()
 end)
 
-CodexBrowser:SetScript("OnMouseUp",function(self)
-  self:StopMovingOrSizing()
+-- Pop to front for search results
+CodexBrowser:SetScript("OnShow", function(self)
+    self:Raise()
 end)
 
 CodexBrowser:SetScript("OnUpdate", function(self)
@@ -791,6 +836,13 @@ CodexBrowser.clean.text:SetFont(CodexUI.defaultFont, CodexUIConfig.global.fontSi
 CodexBrowser.clean.text:SetText(L["Clean Map"])
 CodexUI.api.SkinButton(CodexBrowser.clean)
 
+-- CHANGE: Use HIGH (same as Map) or MEDIUM (same as Bags)
+CodexBrowser:SetFrameStrata("MEDIUM") 
+-- CHANGE: Lower the level so it doesn't force itself to the top
+CodexBrowser:SetFrameLevel(10)
+-- KEEP: This still lets it jump to front ONLY when you click it
+CodexBrowser:SetToplevel(true) 
+
 CreateBrowseWindow("units", "CodexBrowserUnits", CodexBrowser, "BOTTOMLEFT", 5, 5)
 CreateBrowseWindow("objects", "CodexBrowserObjects", CodexBrowser, "BOTTOMLEFT", 164, 5)
 CreateBrowseWindow("items", "CodexBrowserItems", CodexBrowser, "BOTTOMRIGHT", -164, 5)
@@ -852,3 +904,30 @@ CodexBrowser.input:SetScript("OnTextChanged", function(self)
 end)
 
 CodexUI.api.CreateBackdrop(CodexBrowser.input, nil, true)
+
+-- THE SURGICAL FIX: Safely brightens the results without breaking them
+local function BrightenCodex(self)
+    -- Only fix the actual search results and their icons
+    if self.tabs then
+        for _, tab in pairs(self.tabs) do
+            if tab.list and tab.list.buttons then
+                for _, button in ipairs(tab.list.buttons) do
+                    -- Force the text to be solid white
+                    if button.text then 
+                        button.text:SetAlpha(1)
+                        button.text:SetIgnoreParentAlpha(true)
+                        button.text:SetTextColor(1, 1, 1, 1)
+                    end
+                    -- Force the faction icons to be solid
+                    if button.factionA then button.factionA:SetAlpha(1) end
+                    if button.factionH then button.factionH:SetAlpha(1) end
+                end
+            end
+        end
+    end
+end
+
+-- Run this only when the window is shown
+CodexBrowser:HookScript("OnShow", function(self)
+    BrightenCodex(self)
+end)

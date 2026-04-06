@@ -1,5 +1,11 @@
 # Changelog
 
+## Beta 1.2.1 (Hotfix)
+
+- **Fixed "Faded/Washed-out" UI Text: Resolved an issue where the Quest Browser text appeared faint or transparent on some characters.
+    Normalized Frame Layers: Hard-coded the FrameLevel to (1) to prevent the TBC Anniversary engine from "inflating" layers (Z-fighting), ensuring the background and text render correctly by default.
+    Improved First-Time Setup: New characters will no longer require layout-local.txt resets to see a crisp, clear UI.
+
 ## Beta 1.1 - The "High-Visibility" Update
 - **UI Fix**: Resolved "ghostly" faded text and icons in the browser results.
 - **Scaling**: Optimized for 1440p and 3440px (Ultrawide) monitor resolutions.

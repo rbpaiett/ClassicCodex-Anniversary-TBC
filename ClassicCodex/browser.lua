@@ -839,7 +839,8 @@ CodexUI.api.SkinButton(CodexBrowser.clean)
 -- CHANGE: Use HIGH (same as Map) or MEDIUM (same as Bags)
 CodexBrowser:SetFrameStrata("MEDIUM") 
 -- CHANGE: Lower the level so it doesn't force itself to the top
-CodexBrowser:SetFrameLevel(10)
+--CodexBrowser:SetFrameLevel(10)
+CodexBrowser:SetFrameLevel(1)
 -- KEEP: This still lets it jump to front ONLY when you click it
 CodexBrowser:SetToplevel(true) 
 

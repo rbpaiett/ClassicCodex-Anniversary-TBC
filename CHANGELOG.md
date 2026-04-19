@@ -1,5 +1,15 @@
 # Changelog
 
+## Beta 1.2.2 Update
+
+More consistency updates
+-"A Demonstration of Loyalty" update to match Anniversary realm.
+-"Hogger" quest title had an extra space which made /codex quest Hogger search impossible.
+-Some quest items were sourced from containers which were sourced by a vendor.  
+    It meant that there was no direct connection from a quest item and a vendor.  A comment ability was added so that clarification could be added without breaking the DB structure (custom_notes.lua).
+-Some quests were set up for wotlk positions and were moved back to tbc.
+
+
 ## Beta 1.2.1 (Hotfix)
 
 - **Fixed "Faded/Washed-out" UI Text: Resolved an issue where the Quest Browser text appeared faint or transparent on some characters.

@@ -22,3 +22,6 @@ manual-patch.lua
 # Place it here so it doesn't interrupt the initial database merge
 quests-questie-tbc.lua
 quests-questie.lua
+
+# 4. OTHER
+custom_notes.lua

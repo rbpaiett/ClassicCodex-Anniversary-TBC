@@ -12528,8 +12528,8 @@ CodexDB["quests"]["enUS-tbc"]={
 ["T"]="A Gesture of Commitment",
 },
 [64142]={
-["D"]="",
-["O"]="Lady Liadrin in Silvermoon City wants you to destroy 3 Scourge Meat Wagons and kill 15 Scourge Siege Engineers. ",
+["D"]="We Blood Knights are bound to defend Quel'Thalas, $N. This is a central part of your training. Our enemies are fierce and unrelenting. Silvermoon and its people remain free by our efforts and the support of our allies.$B$BI have received some disturbing reports of a renewed Scourge presence to the southeast of our border with the Eastern Plaguelands. A company of Scourge siege engineers and their equipment appear to be staging for an attack on the Ghostlands. They must not be permitted to succeed.",
+["O"]="Lady Liadrin in Silvermoon City wants you to destroy 3 Scourge Meat Wagons and kill 15 Scourge Siege Engineers.",
 ["T"]="A Demonstration of Loyalty",
 },
 [64143]={

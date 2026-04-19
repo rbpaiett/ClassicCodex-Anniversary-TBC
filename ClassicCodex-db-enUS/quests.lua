@@ -827,7 +827,7 @@ CodexDB["quests"]["enUS"]={
 [176]={
 ["D"]="Wanted: Hogger$B$BA huge gnoll, Hogger, is prowling the woods in southwestern Elwynn.  He has overpowered all attempts at his capture.$B$BThe Stormwind Army has placed a generous bounty on the Gnoll.  To earn the reward, bounty hunters should bring proof of Hogger\'s demise to Marshal Dughan in Goldshire.",
 ["O"]="Slay the gnoll Hogger and bring his Huge Gnoll Claw to Marshal Dughan.",
-["T"]="Wanted:  \"Hogger\"",
+["T"]="Wanted: \"Hogger\"",
 },
 [177]={
 ["D"]="The looking glass was one of my finest treasures until. . .the incident.  After that happened, I discarded it behind the barn.  There was an Insane Ghoul who used to roam back there.  Perhaps he picked it up.  Rumor has it the devilish beast resides in the Tranquil Gardens Cemetery.",

@@ -6566,6 +6566,7 @@ QuestieDB.questData = [[return {
 [12492] = {"Direbrew's Dire Brew",{nil,nil,{38281}},{{24711}},65,-1,690,nil,{"Give Direbrew's Dire Brew to Tapper Swindlekeg at the Brewfest camp near Orgrimmar."},nil,nil,38281,nil,nil,nil,nil,nil,-370},
 [12513] = {"Nice Hat...",{{28126}},{{28126}},66,68,0,nil,{"Don Carlos has inadvertently challenged you to defeat his younger self in Old Hillsbrad. Afterwards, bring Don Carlos' Hat to him in Tanaris as proof."},nil,{nil,nil,{{38329}}},nil,nil,nil,nil,nil,nil,2367,nil,nil,nil,nil,nil,256},
 [12515] = {"Nice Hat...",{{28126}},{{28126}},66,68,0,nil,{"Don Carlos has inadvertently challenged you to defeat his younger self in Old Hillsbrad. Afterwards, bring Don Carlos' Hat to him in Tanaris as proof."},nil,{nil,nil,{{38329}}},nil,nil,nil,nil,nil,nil,1941,nil,nil,nil,nil,nil,128},
+[64142] = {"A Demonstration of Loyalty"},{{17076},{{17076}},60,-1,512,2,{"Lady Liadrin in Silvermoon City wants you to destroy 3 Scourge Meat Wagons and kill 15 Scourge Siege Engineers."},nil,{{{17878}},{{182058,"Destroy Scourge Meat Wagons"}}},nil,nil,{9723},nil,nil,nil,-141,nil,nil,nil,nil,9735,136},
 }]]
 
 -- [[ PROTECTED STAGGERED BRIDGE FOR TBC QUESTS ]]

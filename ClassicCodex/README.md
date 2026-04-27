@@ -1,11 +1,14 @@
 ATTENTION: Community-Maintained Beta (Anniversary TBC)
-Current Status: Beta 1.2.1 — Stable (Performance verified for TBC).
+Current Status: Beta 1.2.3 — Stable (Performance verified for TBC).
 
-Version 1.2.1-TBC (Hotfix)
+Version 1.2.3-TBC Beta
 Release Notes:
-Fixed "Faded/Washed-out" UI Text: Resolved an issue where the Quest Browser text appeared faint or transparent on some characters.
-Normalized Frame Layers: Hard-coded the FrameLevel to (1) to prevent the TBC Anniversary engine from "inflating" layers (Z-fighting), ensuring the background and text render correctly by default.
-Improved First-Time Setup: New characters will no longer require layout-local.txt resets to see a crisp, clear UI.
+
+-Added missing vendor locations for various items.
+-Added missing Horde marker for quest Wanted: Annihilator Servo!.
+-Added coords & quest link to the Arcane Annihilators for the Wanted: Annihilator Servo! quest.
+-Corrected mapID for Golem Lord Argelmach so that the map location appears upon search.
+-Fixed search function /codex vendor <item> feature.  It should be noted that the resulting markers on the map will include unit drops as well as vendors.
 
 Compatibility Note:
 The 20-30 second game freeze previously reported is not caused by this addon. It is a known conflict between the standalone Ace3 library and All The Things. If you experience freezes, please check those specific addons.

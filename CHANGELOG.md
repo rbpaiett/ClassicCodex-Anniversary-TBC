@@ -1,5 +1,14 @@
 # Changelog
 
+## Beta 1.2.3 Update
+
+-Added missing vendor locations for various items.
+-Added missing Horde marker for quest Wanted: Annihilator Servo!.
+-Added coords & quest link to the Arcane Annihilators for the Wanted: Annihilator Servo! quest.
+-Corrected mapID for Golem Lord Argelmach so that the map location appears upon search.
+-Fixed search function /codex vendor <item> feature.  It should be noted that the resulting markers on the map will include unit drops as well as vendors.
+
+
 ## Beta 1.2.2 Update
 
 More consistency updates

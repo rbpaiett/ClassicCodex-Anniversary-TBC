@@ -65,8 +65,17 @@ SlashCmdList["CODEX"] = function(input, editBox)
     end
 
     if arg1 == "vendor" then
-        local maps = CodexDatabase:SearchVendorByItemName(arg2, meta, true)
-        CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
+        -- Pre-set the meta table to look for vendors
+        meta = meta or {}
+        meta.searchType = "vendor"
+        meta.itemSearchType = "V" -- Targeting that ["V"] key you found
+    
+        -- Use the exact line from the working 'item' block
+        local maps = CodexDatabase:SearchItemByName(arg2, meta, "LOWER", true)
+    
+        if maps then
+            CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
+        end
         return
     end
 

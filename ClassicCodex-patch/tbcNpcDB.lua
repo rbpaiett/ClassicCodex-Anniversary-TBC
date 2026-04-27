@@ -6430,7 +6430,7 @@ QuestieDB.npcData = [[return {
 [8980] = {'Firegut Captain',2718,2718,55,55,0,nil,nil,0,nil,nil,14,nil,nil,0},
 [8981] = {'Malfunctioning Reaver',3700,3700,56,56,4,{[46]={{88.06,31.77},{79.17,29.71},{90.02,45.99},{85.81,57.07},{88.6,57.35}}},nil,46,nil,nil,91,nil,nil,0},
 [8982] = {'Ironhand Guardian',96,96,60,60,1,{[1585]={{-1,-1}}},nil,1585,nil,nil,15,"AH",nil,0},
-[8983] = {'Golem Lord Argelmach',12546,12546,55,55,1,{[1585]={{-1,-1}}},nil,1585,nil,nil,54,nil,nil,0},
+[8983] = {'Golem Lord Argelmach',12546,12546,55,55,1,{[1584]={{-1,-1}}},nil,1584,nil,nil,54,nil,nil,0},
 [8996] = {'Voidwalker Minion',932,932,47,47,0,nil,nil,0,nil,nil,90,nil,nil,0},
 [8997] = {'Gershala Nightwhisper',4900,4900,20,20,0,{[148]={{38.33,43.04}}},nil,148,{1275},{1275,3765},80,"A",nil,2},
 [8999] = {'Innkeeper Sentinel Hill',334,334,8,8,0,nil,nil,0,nil,nil,55,"A","Innkeeper",65667},

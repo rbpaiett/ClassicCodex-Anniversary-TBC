@@ -4063,8 +4063,8 @@ CodexDB["quests"]["enUS-tbc"]={
 ["T"]="Fertile Spores",
 },
 [9807]={
-["D"]="",
-["O"]="",
+["D"]="We can always use more fertile spores, $R. Tallstalks are incredibly useful mushrooms. Being able to grow them lets us do many things with them.",
+["O"]="Required items: 6 Fertile Spores.",
 ["T"]="More Fertile Spores",
 },
 [9808]={
@@ -10267,11 +10267,11 @@ CodexDB["quests"]["enUS-tbc"]={
 ["O"]="Follow Captain Skyshatter while attempting to stay on your flying mount. Should you defeat Captain Skyshatter, report your victory to Ja\'y Nosliw at the Dragonmaw Base Camp in Shadowmoon Valley.",
 ["T"]="Dragonmaw Race: Captain Skyshatter",
 },
-[11072]={
-["D"]="The descendants held prisoner by the Skettis talonpriests are listed in this book: Gezzarak the Huntress, Karrog the crystal giant, the heretic known as Darkscreecher Akkarai and Vakkiz the Windrager.  They will all need to be slain before Terokk returns to this world.$B$BYou will need the scrolls carried by the time-lost arakkoa to call them forth at the summoning circles in Skettis.  Bring me a token from each one.  These are powerful beings you will be facing; you would do well to bring friends.",
-["O"]="Find the Skull Piles in the middle of the summoning circles of Skettis. Summon and defeat each of the descendants by using 10 Time-Lost Scrolls at the Skull Pile.  Return to Hazzik at Blackwind Landing with a token from each.",
-["T"]="OLD Adversarial Blood",
-},
+--[11072]={
+--["D"]="The descendants held prisoner by the Skettis talonpriests are listed in this book: Gezzarak the Huntress, Karrog the crystal giant, the heretic known as Darkscreecher Akkarai and Vakkiz the Windrager.  They will all need to be slain before Terokk returns to this world.$B$BYou will need the scrolls carried by the time-lost arakkoa to call them forth at the summoning circles in Skettis.  Bring me a token from each one.  These are powerful beings you will be facing; you would do well to bring friends.",
+--["O"]="Find the Skull Piles in the middle of the summoning circles of Skettis. Summon and defeat each of the descendants by using 10 Time-Lost Scrolls at the Skull Pile.  Return to Hazzik at Blackwind Landing with a token from each.",
+--["T"]="OLD Adversarial Blood",
+--},
 [11073]={
 ["D"]="I... I\'ve turned a blind eye to your dealings with the arakkoa prisoner, $N.  It looks like your instincts to cooperate with him were right.$B$BYou must understand... I would\'ve faced a mutiny in my current state if I endorsed your efforts to bring Terokk to this world.$B$BTake the items that Hazzik prepared for you and go ahead with your plan.  I will command my men to back you up when the time comes.  I recommend that you bring a force of your own as well.  I fear you\'ll only get one chance at this.",
 ["O"]="Take the Time-Lost Offering prepared by Hazzik to the Skull Pile at the center of Skettis and summon and defeat Terokk.  Return to Sky Commander Adaris when you\'ve completed this task.",

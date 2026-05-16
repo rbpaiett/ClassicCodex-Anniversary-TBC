@@ -1,18 +1,19 @@
 ATTENTION: Community-Maintained Beta (Anniversary TBC)
-Current Status: Beta 1.2.3 — Stable (Performance verified for TBC).
+Current Status: Beta 1.2.4 — Stable (Performance verified for TBC).
 
-Version 1.2.3-TBC Beta
+Version 1.2.4-TBC Beta
 Release Notes:
 
--Added missing vendor locations for various items.
--Added missing Horde marker for quest Wanted: Annihilator Servo!.
--Added coords & quest link to the Arcane Annihilators for the Wanted: Annihilator Servo! quest.
--Corrected mapID for Golem Lord Argelmach so that the map location appears upon search.
--Fixed search function /codex vendor <item> feature.  It should be noted that the resulting markers on the map will include unit drops as well as vendors.
+-Added or changed forge, anvil, mailbox locations in various areas to make them search friendly.
+-Added More Fertile Spores quest to search db.
+-Added Skull Piles to appear on map when clicking on the quest search results for Adversarial Blood and added a corresponding quest note to the time-lost scroll tooltips.
+-Added search results for poison material vendors
+-Added Skulloc's Soul map location for the quest Into the Soulgrinder.
+-Added summoning locations for the quest Guardian of the Monument with a tooltip note for Fel Whips.
+-Removed more items, units, etc that didn't belong in the current game version.
+-Made further corrections to the general db to make it more accurate.
+-Updated CHANGELOG.md and README.md.
 
-Compatibility Note:
-The 20-30 second game freeze previously reported is not caused by this addon. It is a known conflict between the standalone Ace3 library and All The Things. If you experience freezes, please check those specific addons.
-Requirement: Must have Loot Codex installed for the database.
 
 Original Project: https://github.com/SwimmingTiger/ClassicCodex / https://www.curseforge.com/wow/addons/classiccodex
 

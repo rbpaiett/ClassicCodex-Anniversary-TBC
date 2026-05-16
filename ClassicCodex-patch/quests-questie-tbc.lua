@@ -7713,7 +7713,7 @@ D[11069].start.U={23345} --old: {13437,23345}
 D[11069].repu={id=1015,min=9000} --old: id=nil
 D[11070].repu={id=1015,min=9000} --old: id=nil
 D[11071].repu={id=1015,min=9000} --old: id=nil
-D[11072].min=70 --old: nil
+--D[11072].min=70 --old: nil
 D[11074].skill={id=762,min=225} --old: id=762
 D[11075].race=nil --old: 1791
 D[11075].repu={id=1015,min=3000} --old: id=nil

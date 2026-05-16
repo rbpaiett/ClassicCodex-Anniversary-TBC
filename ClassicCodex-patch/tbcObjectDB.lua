@@ -7966,7 +7966,7 @@ QuestieDB.objectData = [[return {
 [185572] = {"",nil,nil,{[3522]={{76.56,32.89}}},3522},
 [185573] = {"",nil,nil,{[3522]={{77.25,33.68}}},3522},
 [185574] = {"Slaag's Standard",nil,nil,nil,0},
-[185577] = {"Skulloc's Soul",nil,nil,nil,0},
+[185577] = {"Skulloc's Soul",nil,nil,{[3522]={{60.5,24.4}}},3522},
 [185580] = {"Moonstone Altar",nil,nil,{[16]={{14.14,47.8}}},16},
 [185582] = {"Hanging, Square, Large, Christmas",nil,nil,nil,0},
 [185584] = {"Naj'entus Spine",nil,nil,nil,0},

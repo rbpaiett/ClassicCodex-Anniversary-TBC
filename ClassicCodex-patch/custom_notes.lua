@@ -1,7 +1,10 @@
 local customItemNotes = {
     [33993] = "Obtained by hexing a Forest Frog!", -- Mojo
     [33865] = "Used to hex Forest Frogs in ZA.",   -- Amani Hex Stick
+    [32620] = "You need 10 of these to summon either Darkscreecher Akkarai, Gezzarak the Huntress, Karrog, or Vakkiz the Windrager while on the quest Adversarial Blood.",
     [23627] = "Purchased via Sealed Scroll Case (0.2% chance) from Forest Frog vendor in Zul'Aman",
+    [32697] = "To summon an Apexis Guardian, use 35 Apexis Shards on a large Apexis Monument.",
+    [32733] = "Use 35 Apexis Shards on a Fel Crystal Prism (at Forge Camp: Wrath or Terror), summoning one of four possible elite demons.",
 }
 
 local function AddCustomCodexNote(self)

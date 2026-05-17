@@ -401,6 +401,69 @@ function CodexMap:ShowTooltip(meta, tooltip)
 		end
 	end
 
+-- ==================== INJECT STACKED BOSSES INTO MAP TOOLTIP ==================== 
+-- 1. MASTER DICTIONARY: Easily add new Object IDs and their corresponding Boss IDs here
+local CustomObjectSummons = {
+    [185913] = {23161, 23162, 23163, 23165}, -- Skull Pile (Adversarial Blood)
+    [185928] = {23204},                      -- Ancient Skull Pile (Terokk's Downfall)
+    [185944] = {22275},                      -- Apexis Guardian (Guardian of the Monument)
+}
+
+-- NEW COST DICTIONARY: Maps an Object ID to its required activation cost string
+local CustomMaterialCosts = {
+    [185913] = "Requires: 10x Time-Lost Scroll",
+    [185928] = "Requires: 1x Time-Lost Offering",
+    [185944] = "Requires: 35x Apexis Shard", -- Standard TBC cost for the Ogri'la Monument
+}
+
+-- 2. MASTER NAME REGISTER: Centralized fallback list for all your custom bosses
+local CustomBossNameFallback = {
+    [23161] = "Darkscreecher Akkarai",
+    [23162] = "Karrog",
+    [23163] = "Gezzarak the Huntress",
+    [23165] = "Vakkiz",
+    [23204] = "Terokk",
+    [22275] = "Apexis Guardian",
+}
+
+-- 3. THE ENGINE LOOP: Automatically handles layout generation dynamically
+local currentObjectId = meta and meta["spawnId"]
+if currentObjectId then
+    -- A. MATERIAL COST LINE DRAW: Triggers if you added text in the CustomMaterialCosts table
+    if CustomMaterialCosts[currentObjectId] then
+        tooltip:AddLine(" ") -- Adds breathing room padding
+        tooltip:AddLine("|cff00ccff" .. CustomMaterialCosts[currentObjectId] .. "|r") -- Light Blue Text!
+    end
+
+    -- B. SUMMON DETAILS DRAW: Triggers if you linked boss targets to this object
+    if CustomObjectSummons[currentObjectId] then
+        -- Skip the extra spacer line if the material check above already added one
+        if not CustomMaterialCosts[currentObjectId] then 
+            tooltip:AddLine(" ") 
+        end
+        
+        -- DYNAMIC HEADER CHECK: Counts how many Boss IDs are inside the table row
+        local totalBosses = #CustomObjectSummons[currentObjectId]
+        if totalBosses == 1 then
+            tooltip:AddLine("|cffffd100Summons:|r")
+        else
+            tooltip:AddLine("|cffffd100Possible Summons:|r")
+        end
+        
+        -- Loop through whatever boss array you assigned to this object above
+        for _, bossId in ipairs(CustomObjectSummons[currentObjectId]) do
+            local bossName = CodexDatabase and CodexDatabase.GetUnitName and CodexDatabase:GetUnitName(bossId)
+            
+            if not bossName or bossName == "" then
+                bossName = CustomBossNameFallback[bossId] or ("Unknown Boss (" .. bossId .. ")")
+            end
+            
+            tooltip:AddLine("• " .. bossName, 1, 1, 1) -- White text stacked vertically!
+        end
+    end
+end
+-- ================================================================================
+
 	tooltip:Show()
 end
 

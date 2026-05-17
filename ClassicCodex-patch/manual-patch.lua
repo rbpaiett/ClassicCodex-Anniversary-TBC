@@ -52,6 +52,9 @@ D[1367].obj = {
 D[1368].obj = {
   U={4638,4639,4640,4641,4642,4643,4644,4645},
 }
+--D[11885].obj = {
+--  O={185913},
+--}
 
 -- Alliance-specific patches
 if select(4, GetAddOnInfo('MergeQuestieToCodexDB')) then return end

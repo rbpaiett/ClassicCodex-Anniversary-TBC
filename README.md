@@ -1,18 +1,14 @@
 ATTENTION: Community-Maintained Beta (Anniversary TBC)
-Current Status: Beta 1.2.4 — Stable (Performance verified for TBC).
+Current Status: Beta 1.2.5 — Stable (Performance verified for TBC).
 
-Version 1.2.4-TBC Beta
-Release Notes:
+1.2.5 Beta Update
 
--Added or changed forge, anvil, mailbox locations in various areas to make them search friendly.
--Added More Fertile Spores quest to search db.
--Added Skull Piles to appear on map when clicking on the quest search results for Adversarial Blood and added a corresponding quest note to the time-lost scroll tooltips.
--Added search results for poison material vendors
--Added Skulloc's Soul map location for the quest Into the Soulgrinder.
--Added summoning locations for the quest Guardian of the Monument with a tooltip note for Fel Whips.
--Removed more items, units, etc that didn't belong in the current game version.
--Made further corrections to the general db to make it more accurate.
--Updated CHANGELOG.md and README.md.
+Feature: Add dynamic multi-objective mapping and smart tooltip injector.
+
+- Separated regular skull piles from ancient skull pile behaviors.
+- Added automated header counting (Summons vs. Possible Summons).
+- Integrated light blue CustomMaterialCosts tracker for game objects.
+- Added isolated scale overrides and icon swaps for complex mechanics.
 
 
 Original Project: https://github.com/SwimmingTiger/ClassicCodex / https://www.curseforge.com/wow/addons/classiccodex

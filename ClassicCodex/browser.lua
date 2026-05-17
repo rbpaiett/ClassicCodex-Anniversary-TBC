@@ -185,15 +185,52 @@ local function ResultButtonClick(self, arg1)
     elseif self.btype == "quests" then
         if IsShiftKeyDown() then
             ChatFrame1EditBox:Show()
-            -- Task link cannot be sent to chat channel, send plain text instead.
-            --ChatFrame1EditBox:Insert("|cffffff00|Hquest:" .. (self.id or 0) .. ":0:0:0|h[" .. self.name .. "]|h|r")
             ChatFrame1EditBox:Insert(self.name)
-        elseif CodexBrowser.selectState then
-            local maps = CodexDatabase:SearchQuestByName(self.name)
-            CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
         else
-            local maps = CodexDatabase:SearchQuestById(self.id, meta)
-            CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
+            local maps
+            if CodexBrowser.selectState then
+                maps = CodexDatabase:SearchQuestByName(self.name)
+            else
+                -- 1. Grab the baseline quest map markers (your skull piles)
+                maps = CodexDatabase:SearchQuestById(self.id, meta) or {}
+                
+                -- 2. Target the correct sub-table (CodexDB.quests.data)
+                local questData = CodexDB and CodexDB.quests and CodexDB.quests.data and CodexDB.quests.data[self.id]
+                
+                -- 3. Check for your custom Key 21 (requiredSourceItems)
+                local sourceItems = questData and questData[21]
+                
+                -- FALLBACK: If the database patch didn't load, force it for Adversarial Blood
+                --if (not sourceItems or type(sourceItems) ~= "table") and (self.id == 11885 or self.name == "Adversarial Blood") then
+                  --  sourceItems = {32620}
+                --end
+                
+                -- 4. If source items exist, search for their drop locations and merge them
+                if sourceItems and type(sourceItems) == "table" then
+                    if type(maps) ~= "table" then maps = {} end
+                    
+                    for _, itemId in ipairs(sourceItems) do
+                        local itemMaps = CodexDatabase:SearchItemById(itemId, meta)
+                        if itemMaps and type(itemMaps) == "table" then
+                            -- Merge the item drop mob locations smoothly into the quest map data
+                            for mapId, mapData in pairs(itemMaps) do
+                                if not maps[mapId] then
+                                    maps[mapId] = mapData
+                                else
+                                    for nodeKey, nodeValue in pairs(mapData) do
+                                        maps[mapId][nodeKey] = nodeValue
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+            
+            -- Draw the combined markers (Skull Piles + Scroll Mob Drops)
+            if maps then
+                CodexMap:ShowMapId(CodexDatabase:GetBestMap(maps))
+            end
         end
     elseif self.btype == "units" then
         if IsShiftKeyDown() then

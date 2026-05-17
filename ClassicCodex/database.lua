@@ -810,6 +810,98 @@ function CodexDatabase:SearchQuestById(id, meta, maps)
             end
         end
     end
+    
+    -- ==================== CUSTOM SCALABLE METADATA OBJECTIVES ====================
+    -- HOW TO ADD CUSTOM TOOLTIP SUMMONS (TEMPLATE CHEAT SHEET):
+    -- 1. Always place a comma (,) between each separate Object entry row.
+    -- 2. Section 1 links the environmental Object ID to a table array of Boss NPC IDs.
+    -- 3. Section 2 maps those Boss NPC IDs to their real English display strings.
+    -- Template Layout:
+    --    [OBJECT_ID] = {NPC_ID_1, NPC_ID_2},
+    --    [NPC_ID_1] = "Name String",
+    -- ============================================================================
+    -- 1. MASTER DICTIONARY: Maps each physical object ID to its specific encounter targets
+    
+    local CustomAdvancedObjectives = {
+        [11885] = { 
+            {
+                ["id"] = 32620,                      -- Time-Lost Scroll
+                ["type"] = "Item",
+                ["size"] = 11,
+                ["texture"] = "Interface\\Addons\\ClassicCodex\\img\\loot.tga",
+            },
+            {
+                ["id"] = 185913,                     -- Skull Pile Game Object ID
+                ["type"] = "Object",                 -- Keep as Object for perfect coordinates
+                ["size"] = 22,                       
+                ["texture"] = "Interface\\Addons\\ClassicCodex\\img\\icon_object.tga",
+            },
+        },
+        
+        [11073] = {
+            {
+                ["id"] = 185928,                      -- Ancient Skull Pile Object ID
+                ["type"] = "Object",                  -- Keep ad Object for perfect coordinates
+                ["size"] = "22",
+                ["texture"] = "Interface\\Addons\\ClassicCodex\\img\\icon_object.tga",
+            },
+        },
+        [11059] = {
+            {
+                ["id"] = 32569,                      -- Apexis Shard
+                ["type"] = "Item",
+                ["size"] = 11,
+                ["texture"] = "Interface\\Addons\\ClassicCodex\\img\\loot.tga",
+            },
+            {
+                ["id"] = 185944,                     -- 
+                ["type"] = "Object",                 -- Keep as Object for perfect coordinates
+                ["size"] = 22,                       
+                ["texture"] = "Interface\\Addons\\ClassicCodex\\img\\icon_object.tga",
+            },
+        }
+    }
+
+    if CustomAdvancedObjectives[id] then
+        for _, objConfig in ipairs(CustomAdvancedObjectives[id]) do
+            local isolatedMeta = {}
+            if meta then
+                for k, v in pairs(meta) do isolatedMeta[k] = v end
+            end
+            
+            isolatedMeta["size"] = objConfig["size"]
+            isolatedMeta["iconSize"] = objConfig["size"] 
+            if objConfig["texture"] then
+                isolatedMeta["texture"] = objConfig["texture"]
+                isolatedMeta["textureOverride"] = objConfig["texture"]
+            end
+
+            local targetMapOutput
+            if objConfig["type"] == "Unit" then
+                targetMapOutput = CodexDatabase:SearchUnitById(objConfig["id"], isolatedMeta)
+            elseif objConfig["type"] == "Object" then
+                targetMapOutput = CodexDatabase:SearchObjectById(objConfig["id"], isolatedMeta)
+            else
+                targetMapOutput = CodexDatabase:SearchItemById(objConfig["id"], isolatedMeta)
+            end
+
+            if targetMapOutput and type(targetMapOutput) == "table" then
+                if not maps then maps = {} end
+                for mapId, mapData in pairs(targetMapOutput) do
+                    if not maps[mapId] then 
+                        maps[mapId] = mapData 
+                    else
+                        if type(maps[mapId]) == "number" and type(mapData) == "number" then
+                            maps[mapId] = maps[mapId] + mapData
+                        else
+                            maps[mapId] = mapData
+                        end
+                    end
+                end
+            end
+        end
+    end
+    -- ============================================================================
 
     return maps
 end

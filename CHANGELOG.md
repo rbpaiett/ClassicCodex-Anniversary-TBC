@@ -1,5 +1,15 @@
 # Changelog
 
+## Beta 1.2.5 Update
+
+Feature: Add dynamic multi-objective mapping and smart tooltip injector.
+
+- Separated regular skull piles from ancient skull pile behaviors.
+- Added automated header counting (Summons vs. Possible Summons).
+- Integrated light blue CustomMaterialCosts tracker for game objects.
+- Added isolated scale overrides and icon swaps for complex mechanics.
+
+
 ## Beta 1.2.4 Update
 
 -Added or changed forge, anvil, mailbox locations in various areas to make them search friendly.

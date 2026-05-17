@@ -6,7 +6,7 @@
 ## Title-zhTW: ClassicCodex 任務助手 (核心)
 
 ## Author: Pgarneau, Shagu, SwimmingTiger
-## Version: v1.5.4-alpha (Anniversary TBC)
+## Version: v1.2.4 Beta (Anniversary TBC)
 
 ## SavedVariablesPerCharacter: CodexConfig, CodexHiddenQuests, CodexBrowserFavorites, CodexColors
 ## Dependencies: ClassicCodex-loader, LootCodex
